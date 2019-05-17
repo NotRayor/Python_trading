@@ -1,0 +1,47 @@
+import pandas_datareader.data as web
+import datatime
+
+DataReader 함수, 웹 상의 데이터를 DataFrame객체로 만드는 기능을 수행한다.
+datetime은, 파이썬에서 날짜를 쉽게 표현하는데 사용되는 모듈,
+datetime 모듈을 이용해, 조회 시작 날짜인 2016-02-19 ~ 2016-03-04 해당하는 변수로 만들자.
+
+ticker = '005930.KS'
+online_source = 'yahoo'
+
+gs = web.DataReader(ticker, online_source,start,end)
+# 첫번째 인자, 조회할 종목, 두번쨰 인자 데이터 가져올 소스에 대한 정보,
+# 세네번째는 조회기간의 시작일과 종료일.
+
+ticker = 'GOLDAMGBD228NLBM'
+#FRED (세인트루이스 연방준비은행 경제 데이터)
+// 이 경우 국제 금가격을 알 수 있다
+df_gold = web.DataReader(ticker, 'fred', start)
+
+
+DataFrame객체는, Data 라는 인덱스를 사용..
+
+====
+
+DataReader는 현재 시점으로, yahoo가 서비스를 중단하고 google은 오류를 도출하여,
+정상적인 동작이 되지 않고, 계산된 값에 오류가 많다.
+
+그래서 대체되는 새로운 모듈,
+finance-datareader를 사용할 것이다.
+
+거래소별 전체 종목코드: KRX (KOSPI, KODAQ, KONEX), NASDAQ, NYSE, AMEX, S&P 500
+
+가능한 가격 데이터들
+해외주식 가격 데이터: AAPL(애플), AMZN(아마존), GOOG(구글) 등
+국내주식 가격 데이터: 005930(삼성전자), 091990(셀트리온헬스케어) 등
+각종 지수: KS11(코스피지수), KQ11(코스닥지수), DJI(다우지수), IXIC(나스닥 지수), US500(S&P 5000)
+환율 데이터: USD/KRX (원달러 환율), USD/EUR(달러당 유로화 환율), CNY/KRW: 위엔화 원화 환율
+암호화폐 가격: BTC/USD (비트코인 달러 가격, Bitfinex), BTC/KRW (비트코인 원화 가격, 빗썸)
+
+
+
+
+
+
+
+
+

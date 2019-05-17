@@ -1,0 +1,66 @@
+주식 분석 기법의 기본! 기본적 분석과 기술적 분석으로 나눠진다.
+두 분석 기법은 이론적 입장이 서로 달라 서로 비방되는데..
+둘다 배워보자.
+
+처음으로 배우는 초보자의 기술적 분석 지표인 '이동평균선'
+
+이 이동평균선을 보고, 매매 시점을 찾는 기법이다..
+이 이동평균선을 보조 지표로, 새로운 알고리즘을 만드는 데, 효과적으로 이용할 수 있을 것이다.
+
+일정 기간 동안의 주가를 산술 평균 값인 주가이동평균을 차례로 연결해 만든 선,
+주가이동평균을 계산할 때, 사용되는 값은 수정종가(Adj Closing Price),
+
+이 주가이동평균선은, 시장의 전반적 주가흐름을 판단하고, 향후 추가 추이를 전망하는 데
+사용되는 기술적 지표
+
+확인해보면, 5일 20일 60일 120일 이동평균선이 교차하여, 크로스라 부르는데,
+이 시점이 매우 중요한 매매 시점이라고 한다.
+
+근데 이게 당연히 무조건 100% 맞는 지표가 아니므로, 각종 도구와 코딩을 통해
+검증하는 작업, 튜닝하는 작업이 필요하다.
+
+pandas.Series.rolling... 매우 유용한 함수
+일정 범위 내에, 규칙적인 연산 ( 이동평균 )을 구할 때 쓰인다.
+Series.rolling(window, min_periods=None, freq=None, center=False, win_type=None,
+	on=None,axis=0,closed=None)
+순차적으로 12개씩 이동평균을 보려면?
+hd_close_12m = hd_close.rolling(window=12).mean() 하면 된다.
+window 몇개씩 연산할지 결정,
+mean() 평균을 구하도록 함, 
+
+이 경우, 12개의 이전데이터가 필요하여, 맨 앞의 데이터들은 평균 데이터가 도출되지 않는다.
+이런 상황에서.
+
+데이터가 1개라도 존재할 때, 평균을 내고 싶다면 min_period를 쓰면 된다.
+hd_close_12m = hd_close.rolling(window=12, min_period = 1).mean() 
+
+mean말고 std 입력시, 분산을 이동하여 계산,
+
+
+===
+참고, 기존 yahoo finance는 정상적으로 동작하지 않으므로,
+고쳐진 fix_yahoo_finanace를 따로 import해서, 조금 달라진 함수로 동작 시킨다.
+
+from pandas_datareader import data
+import fix_yahoo_finance as yf
+
+yf.pdr_override()
+
+naver = data.get_data_yahoo('035420.KS', start, end)
+
+naver.tail()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
